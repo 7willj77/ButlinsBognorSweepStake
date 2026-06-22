@@ -381,6 +381,37 @@
       margin-right: 7px;
     }
 
+    .team-card.eliminated {
+  background:
+    linear-gradient(135deg, rgba(95, 18, 32, .95), rgba(48, 8, 18, .92)),
+    radial-gradient(circle at 100% 0%, rgba(255, 212, 71, .16), transparent 9rem);
+  border-color: rgba(255, 95, 120, .55);
+  box-shadow: 0 18px 38px rgba(70, 0, 20, .45);
+}
+
+.team-card.eliminated:after {
+  content: "OUT";
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  color: #ffd6df;
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: .08em;
+}
+
+.team-card.eliminated strong,
+.team-card.eliminated span {
+  color: #ffe6ea;
+}
+
+.team-card.eliminated span:before {
+  content: "❌";
+}
+
     .prize-grid {
       padding: 24px;
       display: grid;
@@ -755,23 +786,138 @@
     let fixtures = [];
 
     const DATA_URL = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
+const ELIMINATION_SOURCE_URL = './eliminated-teams.json';
 
-    function renderAllocations() {
-      const q = document.getElementById('teamSearch').value.trim().toLowerCase();
-      const grid = document.getElementById('teamsGrid');
+const ELIMINATION_REFRESH_MS = 12 * 60 * 60 * 1000;
 
-      const rows = allocations.filter(([owner, team]) =>
-        `${owner} ${team}`.toLowerCase().includes(q)
-      );
+async function loadEliminatedTeams() {
+  try {
+    const lastUpdated = Number(localStorage.getItem('eliminatedTeamsLastUpdated') || 0);
+    const cachedTeams = localStorage.getItem('eliminatedTeams');
 
-      grid.innerHTML = rows.map(([owner, team]) => `
-        <div class="team-card">
-          <strong>${escapeHtml(owner)}</strong>
-          <span>${escapeHtml(team)}</span>
-        </div>
-      `).join('') || '<p class="muted">No allocated teams found.</p>';
+    const shouldUseCache =
+      cachedTeams &&
+      Date.now() - lastUpdated < ELIMINATION_REFRESH_MS;
+
+    if (shouldUseCache) {
+      eliminatedTeams = new Set(JSON.parse(cachedTeams));
+      renderAllocations();
+      return;
     }
 
+    const res = await fetch(ELIMINATION_SOURCE_URL + '?cacheBust=' + Date.now(), {
+      cache: 'no-store'
+    });
+
+    if (!res.ok) {
+      throw new Error('Could not load eliminated teams JSON');
+    }
+
+    const data = await res.json();
+
+    const teams = Array.isArray(data.eliminatedTeams)
+      ? data.eliminatedTeams
+      : [];
+
+    eliminatedTeams = new Set(
+      teams.map(team => normaliseTeamName(team))
+    );
+
+    localStorage.setItem(
+      'eliminatedTeams',
+      JSON.stringify([...eliminatedTeams])
+    );
+
+    localStorage.setItem(
+      'eliminatedTeamsLastUpdated',
+      String(Date.now())
+    );
+
+    renderAllocations();
+
+  } catch (err) {
+    console.warn('Eliminated teams update failed:', err);
+
+    const cachedTeams = localStorage.getItem('eliminatedTeams');
+
+    if (cachedTeams) {
+      eliminatedTeams = new Set(JSON.parse(cachedTeams));
+      renderAllocations();
+    }
+  }
+}
+    }
+  }
+}
+    let eliminatedTeams = new Set();
+
+function normaliseTeamName(team) {
+  return String(team || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/&/g, 'and')
+    .replace(/[’']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function isTeamEliminated(team) {
+  const normalised = normaliseTeamName(team);
+
+  if (eliminatedTeams.has(normalised)) return true;
+
+  const alias = aliases.get(team);
+
+  if (alias && eliminatedTeams.has(normaliseTeamName(alias))) return true;
+
+  return false;
+}
+
+let eliminatedTeams = new Set();
+
+function normaliseTeamName(team) {
+  return String(team || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/&/g, 'and')
+    .replace(/[’']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function isTeamEliminated(team) {
+  const normalised = normaliseTeamName(team);
+
+  if (eliminatedTeams.has(normalised)) return true;
+
+  const alias = aliases.get(team);
+
+  if (alias && eliminatedTeams.has(normaliseTeamName(alias))) return true;
+
+  return false;
+}
+
+function renderAllocations() {
+  const q = document.getElementById('teamSearch').value.trim().toLowerCase();
+  const grid = document.getElementById('teamsGrid');
+
+  const rows = allocations.filter(([owner, team]) =>
+    `${owner} ${team}`.toLowerCase().includes(q)
+  );
+
+  grid.innerHTML = rows.map(([owner, team]) => {
+    const eliminatedClass = isTeamEliminated(team) ? ' eliminated' : '';
+
+    return `
+      <div class="team-card${eliminatedClass}">
+        <strong>${escapeHtml(owner)}</strong>
+        <span>${escapeHtml(team)}</span>
+      </div>
+    `;
+  }).join('') || '<p class="muted">No allocated teams found.</p>';
+}
     function parseMatchDate(match) {
       if (!match.date) return null;
 
