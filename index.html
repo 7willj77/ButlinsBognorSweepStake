@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Butlins Bognor World Cup Sweepstake</title>
+
   <style>
     :root {
       --bg: #07111f;
@@ -21,9 +22,14 @@
       --line: rgba(255,255,255,.20);
       --shadow: 0 28px 80px rgba(0,0,0,.45);
     }
-    * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -62,7 +68,9 @@
     }
 
     @keyframes slowSpin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     header {
@@ -115,8 +123,13 @@
     }
 
     @keyframes bob {
-      0%,100% { translate: 0 0; }
-      50% { translate: 0 -13px; }
+      0%,100% {
+        translate: 0 0;
+      }
+
+      50% {
+        translate: 0 -13px;
+      }
     }
 
     .badge {
@@ -296,39 +309,6 @@
       filter: brightness(1.08);
     }
 
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 760px;
-    }
-
-    th,
-    td {
-      padding: 15px 16px;
-      border-bottom: 1px solid rgba(255,255,255,.12);
-      text-align: left;
-    }
-
-    th {
-      color: #e8f0ff;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .10em;
-      background: rgba(4,8,20,.38);
-    }
-
-    tbody tr {
-      transition: transform .12s ease, background .12s ease;
-    }
-
-    tr:hover td {
-      background: rgba(255,255,255,.07);
-    }
-
     .teams-grid {
       padding: 22px;
       display: grid;
@@ -382,35 +362,35 @@
     }
 
     .team-card.eliminated {
-  background:
-    linear-gradient(135deg, rgba(95, 18, 32, .95), rgba(48, 8, 18, .92)),
-    radial-gradient(circle at 100% 0%, rgba(255, 212, 71, .16), transparent 9rem);
-  border-color: rgba(255, 95, 120, .55);
-  box-shadow: 0 18px 38px rgba(70, 0, 20, .45);
-}
+      background:
+        linear-gradient(135deg, rgba(95, 18, 32, .95), rgba(48, 8, 18, .92)),
+        radial-gradient(circle at 100% 0%, rgba(255, 212, 71, .16), transparent 9rem);
+      border-color: rgba(255, 95, 120, .55);
+      box-shadow: 0 18px 38px rgba(70, 0, 20, .45);
+    }
 
-.team-card.eliminated:after {
-  content: "OUT";
-  position: absolute;
-  right: 12px;
-  bottom: 10px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.14);
-  color: #ffd6df;
-  font-size: 11px;
-  font-weight: 1000;
-  letter-spacing: .08em;
-}
+    .team-card.eliminated:after {
+      content: "OUT";
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      color: #ffd6df;
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: .08em;
+    }
 
-.team-card.eliminated strong,
-.team-card.eliminated span {
-  color: #ffe6ea;
-}
+    .team-card.eliminated strong,
+    .team-card.eliminated span {
+      color: #ffe6ea;
+    }
 
-.team-card.eliminated span:before {
-  content: "❌";
-}
+    .team-card.eliminated span:before {
+      content: "❌";
+    }
 
     .prize-grid {
       padding: 24px;
@@ -463,6 +443,39 @@
       color: #fff;
       font-weight: 900;
       font-size: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      padding: 15px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      text-align: left;
+    }
+
+    th {
+      color: #e8f0ff;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      background: rgba(4,8,20,.38);
+    }
+
+    tbody tr {
+      transition: transform .12s ease, background .12s ease;
+    }
+
+    tr:hover td {
+      background: rgba(255,255,255,.07);
     }
 
     .statusbar {
@@ -533,46 +546,6 @@
         min-width: 820px;
       }
     }
-
-    @media print {
-      body {
-        background: white;
-        color: black;
-      }
-
-      body:before,
-      body:after,
-      .floaty,
-      header:before {
-        display: none;
-      }
-
-      section {
-        box-shadow: none;
-        background: white;
-        border-color: #ddd;
-      }
-
-      .controls,
-      .statusbar {
-        display: none;
-      }
-
-      .muted,
-      .section-head p {
-        color: #444;
-      }
-
-      th {
-        color: #111;
-        background: #eee;
-      }
-
-      td,
-      th {
-        border-color: #ddd;
-      }
-    }
   </style>
 </head>
 
@@ -603,7 +576,7 @@
 
       <div class="hero-stat">
         <strong>5 min</strong>
-        <span>Auto refresh</span>
+        <span>Fixture refresh</span>
       </div>
     </div>
   </header>
@@ -613,7 +586,7 @@
       <div class="section-head">
         <div>
           <h2><span class="shine">Allocated</span> Teams</h2>
-          <p>Search by person or country.</p>
+          <p>Teams marked maroon are officially out.</p>
         </div>
 
         <div class="controls">
@@ -622,6 +595,11 @@
       </div>
 
       <div class="teams-grid" id="teamsGrid"></div>
+
+      <div class="statusbar">
+        <span id="eliminationStatus">Waiting for eliminated teams update…</span>
+        <span>Eliminated teams source: eliminated-teams.json</span>
+      </div>
     </section>
 
     <section id="prize-pot">
@@ -758,13 +736,16 @@
       ['Czech Republic', 'Czechia'],
       ['Czechia', 'Czech Republic'],
       ['Turkey', 'Türkiye'],
+      ['Turkiye', 'Türkiye'],
       ['Türkiye', 'Turkey'],
       ['Ivory Coast', 'Côte d’Ivoire'],
       ['Côte d’Ivoire', 'Ivory Coast'],
+      ['Cote d Ivoire', 'Côte d’Ivoire'],
       ['Cabo Verde', 'Cape Verde'],
       ['Cape Verde', 'Cabo Verde'],
       ['Bosnia-Herzegovina', 'Bosnia & Herzegovina'],
       ['Bosnia & Herzegovina', 'Bosnia-Herzegovina'],
+      ['Bosnia and Herzegovina', 'Bosnia & Herzegovina'],
       ['Curacao', 'Curaçao'],
       ['Curaçao', 'Curacao'],
       ['DR Congo', 'Congo DR'],
@@ -784,136 +765,139 @@
     });
 
     let fixtures = [];
-
-    const DATA_URL = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
-const ELIMINATION_SOURCE_URL = './eliminated-teams.json';
-
-const ELIMINATION_REFRESH_MS = 12 * 60 * 60 * 1000;
-
-async function loadEliminatedTeams() {
-  try {
-    const lastUpdated = Number(localStorage.getItem('eliminatedTeamsLastUpdated') || 0);
-    const cachedTeams = localStorage.getItem('eliminatedTeams');
-
-    const shouldUseCache =
-      cachedTeams &&
-      Date.now() - lastUpdated < ELIMINATION_REFRESH_MS;
-
-    if (shouldUseCache) {
-      eliminatedTeams = new Set(JSON.parse(cachedTeams));
-      renderAllocations();
-      return;
-    }
-
-    const res = await fetch(ELIMINATION_SOURCE_URL + '?cacheBust=' + Date.now(), {
-      cache: 'no-store'
-    });
-
-    if (!res.ok) {
-      throw new Error('Could not load eliminated teams JSON');
-    }
-
-    const data = await res.json();
-
-    const teams = Array.isArray(data.eliminatedTeams)
-      ? data.eliminatedTeams
-      : [];
-
-    eliminatedTeams = new Set(
-      teams.map(team => normaliseTeamName(team))
-    );
-
-    localStorage.setItem(
-      'eliminatedTeams',
-      JSON.stringify([...eliminatedTeams])
-    );
-
-    localStorage.setItem(
-      'eliminatedTeamsLastUpdated',
-      String(Date.now())
-    );
-
-    renderAllocations();
-
-  } catch (err) {
-    console.warn('Eliminated teams update failed:', err);
-
-    const cachedTeams = localStorage.getItem('eliminatedTeams');
-
-    if (cachedTeams) {
-      eliminatedTeams = new Set(JSON.parse(cachedTeams));
-      renderAllocations();
-    }
-  }
-}
-
     let eliminatedTeams = new Set();
 
-function normaliseTeamName(team) {
-  return String(team || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/&/g, 'and')
-    .replace(/[’']/g, '')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-}
+    const DATA_URL = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
+    const ELIMINATION_SOURCE_URL = './eliminated-teams.json';
+    const ELIMINATION_REFRESH_MS = 12 * 60 * 60 * 1000;
 
-function isTeamEliminated(team) {
-  const normalised = normaliseTeamName(team);
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[ch]));
+    }
 
-  if (eliminatedTeams.has(normalised)) return true;
+    function normaliseTeamName(team) {
+      return String(team || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/&/g, 'and')
+        .replace(/[’']/g, '')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+    }
 
-  const alias = aliases.get(team);
+    function getTeamVariants(team) {
+      const variants = new Set();
+      const original = String(team || '');
 
-  if (alias && eliminatedTeams.has(normaliseTeamName(alias))) return true;
+      variants.add(normaliseTeamName(original));
 
-  return false;
-}
+      if (aliases.has(original)) {
+        variants.add(normaliseTeamName(aliases.get(original)));
+      }
 
-function normaliseTeamName(team) {
-  return String(team || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/&/g, 'and')
-    .replace(/[’']/g, '')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-}
+      aliases.forEach((value, key) => {
+        if (normaliseTeamName(key) === normaliseTeamName(original)) {
+          variants.add(normaliseTeamName(value));
+        }
 
-function isTeamEliminated(team) {
-  const normalised = normaliseTeamName(team);
+        if (normaliseTeamName(value) === normaliseTeamName(original)) {
+          variants.add(normaliseTeamName(key));
+        }
+      });
 
-  if (eliminatedTeams.has(normalised)) return true;
+      return variants;
+    }
 
-  const alias = aliases.get(team);
+    function isTeamEliminated(team) {
+      const variants = getTeamVariants(team);
 
-  if (alias && eliminatedTeams.has(normaliseTeamName(alias))) return true;
+      for (const variant of variants) {
+        if (eliminatedTeams.has(variant)) {
+          return true;
+        }
+      }
 
-  return false;
-}
+      return false;
+    }
 
-function renderAllocations() {
-  const q = document.getElementById('teamSearch').value.trim().toLowerCase();
-  const grid = document.getElementById('teamsGrid');
+    function renderAllocations() {
+      const q = document.getElementById('teamSearch').value.trim().toLowerCase();
+      const grid = document.getElementById('teamsGrid');
 
-  const rows = allocations.filter(([owner, team]) =>
-    `${owner} ${team}`.toLowerCase().includes(q)
-  );
+      const rows = allocations.filter(([owner, team]) =>
+        `${owner} ${team}`.toLowerCase().includes(q)
+      );
 
-  grid.innerHTML = rows.map(([owner, team]) => {
-    const eliminatedClass = isTeamEliminated(team) ? ' eliminated' : '';
+      grid.innerHTML = rows.map(([owner, team]) => {
+        const eliminatedClass = isTeamEliminated(team) ? ' eliminated' : '';
 
-    return `
-      <div class="team-card${eliminatedClass}">
-        <strong>${escapeHtml(owner)}</strong>
-        <span>${escapeHtml(team)}</span>
-      </div>
-    `;
-  }).join('') || '<p class="muted">No allocated teams found.</p>';
-}
+        return `
+          <div class="team-card${eliminatedClass}">
+            <strong>${escapeHtml(owner)}</strong>
+            <span>${escapeHtml(team)}</span>
+          </div>
+        `;
+      }).join('') || '<p class="muted">No allocated teams found.</p>';
+    }
+
+    async function loadEliminatedTeams() {
+      const status = document.getElementById('eliminationStatus');
+
+      try {
+        if (status) {
+          status.textContent = 'Updating eliminated teams…';
+        }
+
+        const res = await fetch(ELIMINATION_SOURCE_URL + '?cacheBust=' + Date.now(), {
+          cache: 'no-store'
+        });
+
+        if (!res.ok) {
+          throw new Error('Could not load eliminated teams JSON');
+        }
+
+        const data = await res.json();
+
+        const teams = Array.isArray(data.eliminatedTeams)
+          ? data.eliminatedTeams
+          : [];
+
+        const normalisedTeams = new Set();
+
+        teams.forEach(team => {
+          getTeamVariants(team).forEach(variant => {
+            normalisedTeams.add(variant);
+          });
+        });
+
+        eliminatedTeams = normalisedTeams;
+
+        renderAllocations();
+
+        if (status) {
+          status.textContent = `Eliminated teams loaded: ${teams.length ? teams.join(', ') : 'none'}`;
+        }
+
+        console.log('Eliminated teams loaded:', [...eliminatedTeams]);
+
+      } catch (err) {
+        console.warn('Eliminated teams update failed:', err);
+
+        if (status) {
+          status.innerHTML = '<span class="error">Could not load eliminated-teams.json. Check the file name and location.</span>';
+        }
+
+        renderAllocations();
+      }
+    }
+
     function parseMatchDate(match) {
       if (!match.date) return null;
 
@@ -998,7 +982,8 @@ function renderAllocations() {
           ownerByTeam.has((match.team2 || '').toLowerCase());
 
         const played = !!match.score;
-        const upcoming = parseMatchDate(match) >= now && !played;
+        const matchDate = parseMatchDate(match);
+        const upcoming = matchDate && matchDate >= now && !played;
 
         if (q && !searchable.includes(q)) return false;
         if (filter === 'played' && !played) return false;
@@ -1008,7 +993,14 @@ function renderAllocations() {
         return true;
       });
 
-      rows.sort((a, b) => parseMatchDate(a) - parseMatchDate(b));
+      rows.sort((a, b) => {
+        const dateA = parseMatchDate(a);
+        const dateB = parseMatchDate(b);
+
+        if (!dateA || !dateB) return 0;
+
+        return dateA - dateB;
+      });
 
       const body = document.getElementById('fixturesBody');
 
@@ -1035,7 +1027,9 @@ function renderAllocations() {
           cache: 'no-store'
         });
 
-        if (!res.ok) throw new Error('Could not load fixture feed');
+        if (!res.ok) {
+          throw new Error('Could not load fixture feed');
+        }
 
         const data = await res.json();
 
@@ -1055,23 +1049,17 @@ function renderAllocations() {
       }
     }
 
-    function escapeHtml(value) {
-      return String(value ?? '').replace(/[&<>"']/g, ch => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      }[ch]));
-    }
-
     document.getElementById('teamSearch').addEventListener('input', renderAllocations);
     document.getElementById('fixtureSearch').addEventListener('input', renderFixtures);
     document.getElementById('fixtureFilter').addEventListener('change', renderFixtures);
-    document.getElementById('refreshBtn').addEventListener('click', loadFixtures);
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      loadFixtures();
+      loadEliminatedTeams();
+    });
 
     renderAllocations();
     loadFixtures();
+    loadEliminatedTeams();
 
     setInterval(loadFixtures, 5 * 60 * 1000);
     setInterval(loadEliminatedTeams, ELIMINATION_REFRESH_MS);
