@@ -1074,6 +1074,7 @@ function renderAllocations() {
     loadFixtures();
 
     setInterval(loadFixtures, 5 * 60 * 1000);
+    setInterval(loadEliminatedTeams, ELIMINATION_REFRESH_MS);
   </script>
 </body>
 </html>
